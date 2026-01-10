@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wizard - Online Video Player</title>
+    <meta name="description" content="Play your videos online without downloading">
+
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">The Wizard</h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="videoUrl" class="input-label">Enter Video URL</label>
+                    <div class="input-wrapper">
+                        <input type="url" id="videoUrl" class="video-input" placeholder="https://example.com/video.mp4"
+                            aria-describedby="urlError">
+                        <button id="loadBtn" class="load-btn">Load Video</button>
+                    </div>
+                    <div id="urlError" class="error-message" role="alert"></div>
+                </div>
+            </section>
+
+            <section class="player-section">
+                <div class="player-wrapper">
+                    <div id="playerPlaceholder" class="player-placeholder">
+                        <div class="placeholder-content">
+                            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <p class="placeholder-text">Load a video to start playing</p>
+                        </div>
+                    </div>
+                    <video id="player" class="player" playsinline controls>
+                        <source id="videoSource" src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div id="loadingState" class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Loading video...</p>
+                    </div>
+                    <div id="errorState" class="error-state">
+                        <p>Failed to load video. Please check the URL and try again.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="actions-section">
+                <div class="action-buttons">
+                    <button id="downloadBtn" class="action-btn" disabled aria-label="Download video">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span class="btn-text">Download</span>
+                    </button>
+                    <button id="vlcBtn" class="action-btn" disabled aria-label="Open in VLC">
+                        <span class="btn-icon">▶</span>
+                        <span class="btn-text">Open in VLC</span>
+                    </button>
+                    <button id="shareBtn" class="action-btn" aria-label="Share">
+                        <span class="btn-icon">↗</span>
+                        <span class="btn-text">Share</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="disclaimer-section">
+                <p class="disclaimer-text">
+                    This website only provides a service to help you play your video online without downloading.
+                    You can report files or videos that contain issues like copyright infringement, 18+ content,
+                    violence, etc.
+                </p>
+                <a href="https://t.me/wforwizar" id="reportBtn" class="report-btn">Report</a>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <a href="https://t.me/wforwizar" id="footerLink" class="footer-link">Made By Wizard</a>
+        </footer>
+    </div>
+
+    <div id="shareModal" class="modal" role="dialog" aria-labelledby="shareTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="shareTitle" class="modal-title">Share</h2>
+                <button class="modal-close" id="closeModal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button id="shareWebsiteBtn" class="modal-btn">
+                    <span class="btn-icon">🔗</span>
+                    <span class="btn-text">Share Website Link</span>
+                </button>
+                <button id="shareVideoBtn" class="modal-btn" disabled>
+                    <span class="btn-icon">🎬</span>
+                    <span class="btn-text">Share Current Video Link</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="vlcModal" class="modal" role="dialog" aria-labelledby="vlcTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="vlcTitle" class="modal-title">Open in VLC</h2>
+                <button class="modal-close" id="closeVlcModal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">Follow these steps to open in VLC:</p>
+                <ol class="modal-list">
+                    <li>Copy the video link</li>
+                    <li>Open VLC → Media → Open Network Stream</li>
+                    <li>Paste the link and play</li>
+                </ol>
+                <button id="copyVlcBtn" class="modal-btn">Copy Video Link</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
