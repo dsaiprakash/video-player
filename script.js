@@ -41,7 +41,7 @@ function initializePlayer() {
             "fullscreen",
         ],
         autoplay: true,
-        hideControls: false,
+        hideControls: true,
     })
 
     player.on("ready", () => {
